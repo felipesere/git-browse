@@ -13,12 +13,10 @@ fn open(url: &str) {
 
 fn main() {
     if let Ok(repo) = Repository::open(".") {
-        let remote = "origin";
-        let maybe_remote = repo.find_remote(remote);
-
-        match maybe_remote {
-            Ok(remote) => open(remote.url().unwrap()),
-            Err(_) => println!("no origin set"),
+        if let Ok(remote) = repo.find_remote("origin") {
+            open(remote.url().unwrap())
+        } else {
+            println!("no origin set")
         }
     } else {
         println!("Not in a git repository")
