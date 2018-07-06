@@ -14,7 +14,7 @@ fn open(url: &str) {
 fn main() {
     if let Ok(repo) = Repository::open(".") {
         let remote = "origin";
-        let mut maybe_remote = repo.find_remote(remote);
+        let maybe_remote = repo.find_remote(remote);
 
         match maybe_remote {
             Ok(remote) => open(remote.url().unwrap()),
